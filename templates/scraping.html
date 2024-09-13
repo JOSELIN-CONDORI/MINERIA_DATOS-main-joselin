@@ -1,0 +1,108 @@
+{% extends "admin_panel.html" %}
+
+{% block content %}
+<div class="scraping-header">
+</div>
+
+<!-- Botones horizontales con íconos -->
+<div class="diario-buttons">
+    <form action="{{ url_for('scraping_page') }}" method="get" class="scraping-form">
+        <input type="hidden" name="url" value="https://elcomercio.pe/ultimas-noticias/">
+        <button type="submit" class="scrape-btn">
+            <i class="fas fa-newspaper"></i> Diario El Comercio
+        </button>
+    </form>
+    <form action="{{ url_for('scraping_page') }}" method="get" class="scraping-form">
+        <input type="hidden" name="url" value="https://diariosinfronteras.com.pe/category/puno/">
+        <button type="submit" class="scrape-btn">
+            <i class="fas fa-newspaper"></i> Diario Sin Fronteras
+        </button>
+    </form>
+    <form action="{{ url_for('scraping_page') }}" method="get" class="scraping-form">
+        <input type="hidden" name="url" value="https://trome.pe/ultimas-noticias/">
+        <button type="submit" class="scrape-btn">
+            <i class="fas fa-newspaper"></i> Diario Trome
+        </button>
+    </form>
+
+    <!-- Botón para descargar los artículos en Excel -->
+    <button id="descargar-excel-btn" class="btn-excel">
+        <i class="fas fa-file-alt"></i>Descargar
+    </button>
+</div>
+<!-- Botón para descargar los artículos en Excel -->
+
+
+
+
+</div>
+
+<!-- Mostrar el nombre del diario si está disponible -->
+{% if diario %}
+<h3 style="font-size: 2em; font-weight: bold;" class="news-header">Noticias Recientes</h3>
+
+{% endif %}
+
+<!-- Mostrar las noticias obtenidas en formato de tarjetas -->
+<div class="articles">
+    {% for articulo in articulos %}
+    <div class="article-card">
+        {% if articulo.imagen != 'No disponible' %}
+        <div class="article-image">
+            <img src="{{ articulo.imagen }}" alt="Imagen del artículo">
+        </div>
+        {% endif %}
+        <div class="article-details">
+            <h3 class="article-title">{{ articulo.titulo }}</h3>
+            <p class="article-meta">Fecha: {{ articulo.fecha }} | Autor: {{ articulo.autor }}</p>
+            <p class="article-excerpt">{{ articulo.contenido }}</p>
+            <a href="{{ articulo.url_articulo }}" target="_blank">
+                <button class="readmore-btn">Leer más</button>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.getElementById('descargar-excel-btn').addEventListener('click', function() {
+        let articulos = [];
+        let diario = "{{ diario }}";  // Obtiene el nombre del diario de la plantilla
+        document.querySelectorAll('.article-card').forEach(function(card) {
+            let articulo = {
+                titulo: card.querySelector('.article-title').textContent,
+                fecha: card.querySelector('.article-meta').textContent.split('|')[0].trim(),
+                autor: card.querySelector('.article-meta').textContent.split('|')[1].trim(),
+                contenido: card.querySelector('.article-excerpt').textContent
+            };
+            articulos.push(articulo);
+        });
+
+        // Enviar los artículos y el diario al backend en formato JSON
+        fetch('/descargar_excel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'articulos=' + encodeURIComponent(JSON.stringify(articulos)) + '&diario=' + encodeURIComponent(diario)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            }
+            throw new Error('Error en la descarga');
+        })
+        .then(blob => {
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'articulos_' + diario + '.xlsx';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+
+{% endblock %}

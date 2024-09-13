@@ -1,0 +1,42 @@
+{% extends "admin_panel.html" %}
+
+{% block content %}
+<div class="container-fluid mt-4 report-section">
+    <h2 class="mb-4 text-center">Reportes de Scraping</h2>
+
+    <div class="row d-flex justify-content-around align-items-center report-cards-container">
+        <!-- Predefinir los diarios para que siempre se muestren -->
+        {% set diarios = [
+            {'nombre': 'El Comercio', 'icono': 'fas fa-newspaper comercio-icon', 'color': 'bg-primary'},
+            {'nombre': 'Trome', 'icono': 'fas fa-bolt trome-icon', 'color': 'bg-warning'},
+            {'nombre': 'Diario Sin Fronteras', 'icono': 'fas fa-mountain fronteras-icon', 'color': 'bg-success'}
+        ] %}
+
+        <!-- Iterar sobre los diarios predefinidos -->
+        {% for diario in diarios %}
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="report-card shadow {{ diario.color }}">
+                <div class="card-icon">
+                    <i class="{{ diario.icono }}"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ diario.nombre }}</h5>
+
+                    <!-- Filtrar reportes para encontrar el del diario actual -->
+                    {% set reporte_diario = reportes | selectattr("diario", "equalto", diario.nombre) | list %}
+
+                    <!-- Verificar si hay reportes para este diario -->
+                    {% if reporte_diario and reporte_diario|length > 0 %}
+                        {% set total_veces = reporte_diario | sum(attribute='total_scrapeos') %}
+                        <p class="card-text">Scrapeado <strong>{{ total_veces }} veces</strong></p>
+                        <p class="card-text">Último scrapeo: {{ reporte_diario[0].dia }}</p>
+                    {% else %}
+                        <p class="card-text text-muted">No se ha realizado scraping reciente.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

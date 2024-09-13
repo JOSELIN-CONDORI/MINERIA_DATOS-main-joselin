@@ -1,0 +1,323 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f4f7f9; /* Color de fondo más suave */
+}
+
+h2, h3 {
+    font-weight: 600;
+    color: #6c5cea; /* Títulos más oscuros */
+}
+
+p {
+    line-height: 1.6;
+    color: #7f8c8d; /* Texto más suave */
+}
+
+/* Scraping Header */
+.scraping-header {
+    margin-bottom: 30px;
+    text-align: center; /* Centrar el texto */
+}
+
+.scraping-header h2 {
+    font-size: 28px;
+    color: #2205f7;
+}
+
+.scraping-header p {
+    font-size: 30px;
+    color: #95a5a6;
+}
+
+/* Botones de diarios en una fila */
+.diario-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center; /* Centrar los botones */
+}
+
+/* Estilos generales para los botones */
+.scrape-btn {
+    background-color: #667eea;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.scrape-btn:hover {
+    background-color: #3498db;
+    transform: translateY(-5px); /* Efecto de elevación */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scrape-btn i {
+    font-size: 22px;
+}
+
+/* Dropdown para deportes */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background-color: #3498db;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.dropdown-content form {
+    display: block;
+    width: 100%;
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+    color: #3498db;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilo de las noticias */
+.articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 0 20px;
+    justify-items: center; /* Centrar las tarjetas */
+}
+
+.article-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 350px; /* Limitar el ancho máximo de las tarjetas */
+}
+
+.article-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.article-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.article-details {
+    padding: 20px;
+}
+
+.article-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #34495e;
+    font-weight: 700;
+}
+
+.article-meta {
+    font-size: 14px;
+    color: #95a5a6;
+    margin-bottom: 15px;
+}
+
+.article-excerpt {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+.readmore-btn {
+    background-color: #667eea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.readmore-btn:hover {
+    background-color: #2205f7;
+    transform: translateY(-3px); /* Efecto de elevación */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de descarga de Excel */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn i {
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+.download-btn:hover {
+    background-color: #218838;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn:active {
+    background-color: #1e7e34;
+    transform: scale(0.98);
+}
+
+/* Responsividad */
+@media (max-width: 992px) {
+    .scraping-header h2 {
+        font-size: 22px;
+    }
+
+    .scrape-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    .article-title {
+        font-size: 18px;
+    }
+
+    .readmore-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .scraping-header h2 {
+        font-size: 20px;
+    }
+
+    .scrape-btn {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+
+    .articles {
+        grid-template-columns: 1fr;
+    }
+
+    .article-title {
+        font-size: 16px;
+    }
+
+    .readmore-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .download-btn {
+        font-size: 16px;
+        padding: 8px 18px;
+    }
+}
+/* Estilo para el botón de descargar Excel */
+/* Estilo para los botones en general */
+.scrape-btn, .btn-excel {
+    background-color: #667eea;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover y Active para todos los botones */
+.scrape-btn:hover, .btn-excel:hover {
+    background-color: #2205f7;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scrape-btn:active, .btn-excel:active {
+    transform: scale(0.98);
+}
+
+/* Alinear el botón de Excel con los otros botones */
+.diario-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Estilo del ícono en el botón de Excel */
+.btn-excel i {
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+.btn-excel {
+    background-color: #667eea;
+}
+
+.btn-excel:hover {
+    background-color: #2205f7;
+}
+
+.btn-excel:active {
+    background-color:#2205f7;
+}

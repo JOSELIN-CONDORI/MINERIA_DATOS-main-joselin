@@ -1,0 +1,63 @@
+    <!-- Enlace al archivo CSS externo -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Extractors</title>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Marilyn Web Extractors</h1>
+        <!-- Mostrar el enlace de Cerrar Sesión si el usuario está autenticado -->
+        {% if current_user.is_authenticated %}
+        <nav>
+            <a href="{{ url_for('auth.logout') }}" class="logout-btn">Cerrar Sesión</a>
+        </nav>
+        {% endif %}
+    </header>
+
+    <div class="container">
+        <!-- Formulario para ingresar la URL -->
+        <form action="/" method="get">
+            <input type="text" id="url" name="url" placeholder="Introduce la URL del diario..." required>
+            <button type="submit">Scrapear Noticias</button>
+        </form>
+
+        <!-- Mostrar el nombre del diario si está disponible -->
+        {% if diario %}
+        <h2>Noticias de {{ diario }}</h2>
+        {% endif %}
+
+        <div class="articles">
+            {% for articulo in articulos %}
+            <div class="article-container">
+                {% if articulo.imagen != 'No disponible' %}
+                <div class="article-image">
+                    <img src="{{ articulo.imagen }}" alt="Imagen del artículo">
+                </div>
+                {% endif %}
+                <div class="article-content">
+                    <h3 class="article-source">Diario: {{ articulo.diario }}</h3>
+                    <h2 class="article-title">{{ articulo.titulo }}</h2>
+                    <p class="article-meta">Fecha: {{ articulo.fecha }} | Autor: {{ articulo.autor }}</p>
+                    <p class="article-excerpt">{{ articulo.contenido }}</p>
+                    <a href="{{ articulo.url_articulo }}" target="_blank" class="article-readmore">Leer más</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Portal de Noticias. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Enlace al archivo JavaScript externo -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

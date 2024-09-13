@@ -1,0 +1,122 @@
+/* Estilos generales para la sección de reportes */
+.report-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+/* Diseño del contenedor de cards en fila horizontal */
+.report-cards-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaciado entre tarjetas */
+}
+
+/* Diseño base para todas las cards */
+.report-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    border-top: 5px solid transparent;
+    width: 100%;
+    max-width: 350px; /* Ajusta las cards para no ser demasiado grandes */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.report-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Iconos en las cards */
+.card-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    transition: transform 0.3s ease;
+}
+
+.report-card:hover .card-icon {
+    transform: rotate(10deg);
+}
+
+/* Estilos individuales para cada diario */
+
+/* El Comercio - Amarillo */
+.comercio-card {
+    border-top-color: #FFD700;
+}
+
+.comercio-icon {
+    background-color: #FFD700;
+    color: #fff;
+}
+
+/* Trome - Naranja */
+.trome-card {
+    border-top-color: #FF4500;
+}
+
+.trome-icon {
+    background-color: #FF4500;
+    color: #fff;
+}
+
+/* Diario Sin Fronteras - Verde */
+.fronteras-card {
+    border-top-color: #2205f7;
+}
+
+.fronteras-icon {
+    background-color: #2205f7;
+    color: #fff;
+}
+
+/* Títulos y texto */
+.card-title {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #2205f7;
+}
+
+.card-text {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Responsividad */
+@media (max-width: 992px) {
+    .report-cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .report-card {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2em;
+    }
+    .card-title {
+        font-size: 1.6em;
+    }
+    .card-text {
+        font-size: 1.1em;
+    }
+}
+
